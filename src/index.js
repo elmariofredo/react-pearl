@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+export function main( API ) {
+
+  ReactDOM.render(
+    <App />,
+    document.getElementById( API.system.mountPoint )
+  );
+
+}
