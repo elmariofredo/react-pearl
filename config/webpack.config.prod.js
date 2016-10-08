@@ -140,8 +140,9 @@ module.exports = {
       // When you `import` an asset, you get its filename.
       {
         test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
-        loader: 'file',
+        loader: 'url',
         query: {
+          limit: 8192,
           name: 'static/media/[name].[hash:8].[ext]'
         }
       },
