@@ -12,7 +12,8 @@
     "check-coverage": "nyc --check-coverage --statements 80 --branches 80 --functions 80 --lines 80 npm test",
     "lint": "tslint \"src/**/*.tsx\" \"src/**/*.ts\" --exclude \"src/**/*.d.ts\"",
     "start": "webpack-dev-server --env.dev --hot",
-    "build": "npm run check-coverage && rimraf dist && webpack --env.prod"
+    "build": "npm run check-coverage && rimraf dist && webpack --env.prod",
+    "build:serve": "npm run build && static -p 8081 -H '{\"Access-Control-Allow-Origin\": \"*\"}' dist"
   },
   "repository": {
     "type": "git",
@@ -62,6 +63,7 @@
     "html-webpack-plugin": "2.22.0",
     "jsdom": "9.4.1",
     "mocha": "3.0.1",
+    "node-static": "0.7.9",
     "nodemon": "1.10.0",
     "nyc": "7.1.0",
     "postcss-cssnext": "2.7.0",

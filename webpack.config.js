@@ -4,11 +4,7 @@ const webpack = require('webpack');
 
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-
-// PostCSS plugins
-const cssnext = require('postcss-cssnext');
 
 // webpack config helpers
 const { getIfUtils, removeEmpty, combineLoaders } = require('webpack-config-utils');
@@ -19,13 +15,14 @@ module.exports = (env) => {
   return {
     context: resolve('src'),
     entry: {
-      app: './main.tsx'
+      app: ifProd( './main.tsx', './main.dev.tsx' )
     },
     output: {
-      filename: '[name].[hash].js',
+      filename: '[name].js',
       path: resolve('dist'),
       // Include comments with information about the modules.
-      pathinfo: ifNotProd()
+      pathinfo: ifNotProd(),
+      libraryTarget: 'umd'
     },
 
     resolve: {
@@ -80,19 +77,6 @@ module.exports = (env) => {
           NODE_ENV: ifProd('"production"', '"development"')
         }
       }),
-
-      ifProd(new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-      })),
-
-      ifProd(new webpack.optimize.CommonsChunkPlugin({
-        minChunks: Infinity,
-        name: 'inline',
-      })),
-
-      // We use ExtractTextPlugin so we get a seperate CSS file instead
-      // of the CSS being in the JS and injected as a style tag
-      ifProd( new ExtractTextPlugin( '[name].[contenthash].css' ) ),
 
       // Deduplicate node modules dependencies
       ifProd(new webpack.optimize.DedupePlugin()),

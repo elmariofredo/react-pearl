@@ -4,4 +4,15 @@ import { render } from 'react-dom';
 import './styles.css';
 import { routes } from './routes';
 
-render( routes, document.getElementById( 'app' ) );
+type ShellAPI = {
+  system: {
+    mountPoint: string
+  }
+}
+
+//noinspection JSUnusedGlobalSymbols
+export function main( API: ShellAPI ) {
+
+  render( routes, document.getElementById( API.system.mountPoint ) );
+
+}
