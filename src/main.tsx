@@ -10,7 +10,7 @@ type ShellAPI = {
   }
 }
 
-//noinspection JSUnusedGlobalSymbols
+// noinspection JSUnusedGlobalSymbols
 export function main( API: ShellAPI ) {
 
   render( routes, document.getElementById( API.system.mountPoint ) );
