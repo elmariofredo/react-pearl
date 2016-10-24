@@ -1,11 +1,6 @@
-declare module '*.css' {
-  let styles: any;
-  export = styles;
-}
-declare module '*.html' {
-  let html: string;
-  export = html;
-}
+declare module '*.css'
+declare module '*.html'
+declare module '*.svg'
 
 declare namespace SystemJS {
   interface System {
@@ -19,3 +14,10 @@ declare namespace SystemJS {
 }
 
 declare var System: SystemJS.System;
+
+// TODO: move to app-shell-toolbox
+interface AppShellAPI {
+  system: {
+    mountPoint: string;
+  }
+}

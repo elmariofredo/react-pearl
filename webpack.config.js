@@ -55,6 +55,13 @@ module.exports = (env) => {
             },
             { loader: 'postcss-loader' }
           ] )
+        },
+        {
+          test: /\.(jpe?g|png|gif|svg)$/i,
+          loaders: [
+            'file?hash=sha512&digest=hex&name=[hash].[ext]',
+            'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+          ]
         }
       ],
     },
@@ -81,20 +88,20 @@ module.exports = (env) => {
       // Deduplicate node modules dependencies
       ifProd(new webpack.optimize.DedupePlugin()),
 
-      // Default webpack build options
-      ifProd(new webpack.LoaderOptionsPlugin({
-        debug: false
-      })),
+      // // Default webpack build options
+      // ifProd(new webpack.LoaderOptionsPlugin({
+      //   debug: false
+      // })),
 
-      // Uglify bundles
-      ifProd(new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false,
-        },
-        output: {
-          comments: false
-        }
-      }))
+      // // Uglify bundles
+      // ifProd(new webpack.optimize.UglifyJsPlugin({
+      //   compress: {
+      //     warnings: false,
+      //   },
+      //   output: {
+      //     comments: false
+      //   }
+      // }))
 
     ])
   }
